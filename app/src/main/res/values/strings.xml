@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="app_name">HI214</string>
+
+    <string name="textview_text">ITSMAP Hand In 2 - Group 14</string>
+
+    <string name="on_create">onCreate() called</string>
+    <string name="on_start">onStart() called</string>
+    <string name="on_resume">onResume() called</string>
+    <string name="on_pause">onPause() called</string>
+    <string name="on_stop">onStop() called</string>
+    <string name="on_destroy">onDestroy() called</string>
+    <string name="on_restart">onRestart() called</string>
+
+    <string name="old_phone_toast">Please, buy a new phone</string>
+
+    <string name="state_launched">Activity launched</string>
+    <string name="state_running">Activity running</string>
+    <string name="state_destroyed">Activity destroyed</string>
+
+</resources>
