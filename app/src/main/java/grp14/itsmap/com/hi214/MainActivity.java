@@ -11,9 +11,12 @@ import grp14.itsmap.com.hi214.utilities.LogCatHelper;
 
 public class MainActivity extends Activity {
 
-    public static String TAG = "ITSMAP - HI2";
+    private String TAG = "ITSMAP - HI2";
+    private String stateTag = "itsmap_save_restore_text";
 
     private LogCatHelper logCatHelper = new LogCatHelper();
+
+    private TextView logcatTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,7 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.main_activity);
 
-        TextView logcatTextView = (TextView) findViewById(R.id.logcat_textview);
+        logcatTextView = (TextView) findViewById(R.id.logcat_textview);
         logCatHelper.init(logcatTextView, TAG);
 
         createLog(getString(R.string.on_create));
@@ -70,6 +73,20 @@ public class MainActivity extends Activity {
         super.onResume();
 
         createLog(getString(R.string.on_restart));
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String text = logcatTextView.getText().toString();
+        outState.putString(stateTag, text);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String text = savedInstanceState.getString(stateTag);
+        logcatTextView.append(text);
     }
 
     private void createLog(String text) {

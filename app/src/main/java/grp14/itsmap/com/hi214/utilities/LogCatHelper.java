@@ -16,6 +16,12 @@ public class LogCatHelper {
     public void init(TextView textView, String tag) {
         this.textView = textView;
         this.tag = tag;
+
+        try {
+            Runtime.getRuntime().exec("logcat");
+        } catch (Exception e) {
+            Log.d(tag, e.toString());
+        }
     }
 
     public void clearLogcat() {
@@ -23,6 +29,7 @@ public class LogCatHelper {
             Runtime.getRuntime().exec("logcat -c");
         } catch (Exception e) {
             Log.d(tag, e.toString());
+            setTextView(e.toString());
         }
     }
 
@@ -43,15 +50,22 @@ public class LogCatHelper {
             }
 
             if(textView != null) {
-                textView.append(log.toString());
+                setTextView(log.toString());
             } else {
                 Log.d(tag, "The textview was null");
             }
         }
         catch (Exception e) {
             Log.d(tag, e.toString());
+            setTextView(e.toString());
         }
 
         clearLogcat();
+    }
+
+    private void setTextView(String text) {
+        if(textView != null) {
+            textView.append(text);
+        }
     }
 }
