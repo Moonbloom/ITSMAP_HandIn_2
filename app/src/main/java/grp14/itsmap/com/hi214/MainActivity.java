@@ -4,36 +4,42 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import grp14.itsmap.com.hi214.utilities.LogCatHelper;
 
 public class MainActivity extends Activity {
 
-    private String TAG = "Lifecycle log: ";
+    public static String TAG = "ITSMAP - HI2";
+
+    private LogCatHelper logCatHelper = new LogCatHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d(TAG, getString(R.string.on_create));
-
-        createToast(getString(R.string.state_launched));
-
         setContentView(R.layout.main_activity);
+
+        TextView logcatTextView = (TextView) findViewById(R.id.logcat_textview);
+        logCatHelper.init(logcatTextView, TAG);
+
+        createLog(getString(R.string.on_create));
+        createToast(getString(R.string.state_launched));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        Log.d(TAG, getString(R.string.on_start));
+        createLog(getString(R.string.on_start));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        Log.d(TAG, getString(R.string.on_resume));
-
+        createLog(getString(R.string.on_resume));
         createToast(getString(R.string.state_running));
     }
 
@@ -41,22 +47,21 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onResume();
 
-        Log.d(TAG, getString(R.string.on_pause));
+        createLog(getString(R.string.on_pause));
     }
 
     @Override
     protected void onStop() {
         super.onResume();
 
-        Log.d(TAG, getString(R.string.on_stop));
+        createLog(getString(R.string.on_stop));
     }
 
     @Override
     protected void onDestroy() {
         super.onResume();
 
-        Log.d(TAG, getString(R.string.on_destroy));
-
+        createLog(getString(R.string.on_destroy));
         createToast(getString(R.string.state_destroyed));
     }
 
@@ -64,7 +69,12 @@ public class MainActivity extends Activity {
     protected void onRestart() {
         super.onResume();
 
-        Log.d(TAG, getString(R.string.on_restart));
+        createLog(getString(R.string.on_restart));
+    }
+
+    private void createLog(String text) {
+        Log.d(TAG, text);
+        logCatHelper.postLogcat();
     }
 
     @SuppressWarnings("deprecation")
