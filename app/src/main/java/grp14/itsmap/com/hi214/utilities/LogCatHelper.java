@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 public class LogCatHelper {
 
-    private static final String processId = Integer.toString(android.os.Process.myPid());
+    private final String processId = Integer.toString(android.os.Process.myPid());
 
     private TextView textView;
     private String tag;
