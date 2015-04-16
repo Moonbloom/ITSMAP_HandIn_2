@@ -14,8 +14,4 @@
 
     <string name="old_phone_toast">Please, buy a new phone</string>
 
-    <string name="state_launched">Activity launched</string>
-    <string name="state_running">Activity running</string>
-    <string name="state_destroyed">Activity destroyed</string>
-
 </resources>

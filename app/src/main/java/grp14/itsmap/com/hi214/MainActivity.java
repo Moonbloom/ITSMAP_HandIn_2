@@ -7,14 +7,10 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import grp14.itsmap.com.hi214.utilities.LogCatHelper;
-
 public class MainActivity extends Activity {
 
     private String TAG = "ITSMAP - HI2";
     private String stateTag = "itsmap_save_restore_text";
-
-    private LogCatHelper logCatHelper = new LogCatHelper();
 
     private TextView logcatTextView;
 
@@ -25,54 +21,50 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main_activity);
 
         logcatTextView = (TextView) findViewById(R.id.logcat_textview);
-        logCatHelper.init(logcatTextView, TAG);
 
-        createLog(getString(R.string.on_create));
-        createToast(getString(R.string.state_launched));
+        createLogAndToast(getString(R.string.on_create));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
 
-        createLog(getString(R.string.on_start));
+        createLogAndToast(getString(R.string.on_start));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        createLog(getString(R.string.on_resume));
-        createToast(getString(R.string.state_running));
+        createLogAndToast(getString(R.string.on_resume));
     }
 
     @Override
     protected void onPause() {
-        super.onResume();
+        super.onPause();
 
-        createLog(getString(R.string.on_pause));
+        createLogAndToast(getString(R.string.on_pause));
     }
 
     @Override
     protected void onStop() {
-        super.onResume();
+        super.onStop();
 
-        createLog(getString(R.string.on_stop));
+        createLogAndToast(getString(R.string.on_stop));
     }
 
     @Override
     protected void onDestroy() {
-        super.onResume();
+        super.onDestroy();
 
-        createLog(getString(R.string.on_destroy));
-        createToast(getString(R.string.state_destroyed));
+        createLogAndToast(getString(R.string.on_destroy));
     }
 
     @Override
     protected void onRestart() {
-        super.onResume();
+        super.onRestart();
 
-        createLog(getString(R.string.on_restart));
+        createLogAndToast(getString(R.string.on_restart));
     }
 
     @Override
@@ -86,19 +78,18 @@ public class MainActivity extends Activity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         String text = savedInstanceState.getString(stateTag);
-        logcatTextView.append(text);
+        logcatTextView.setText(text);
     }
 
-    private void createLog(String text) {
+    private void createLogAndToast(String text) {
         Log.d(TAG, text);
-        logCatHelper.postLogcat();
-    }
+        logcatTextView.append(text);
+        logcatTextView.append("\n");
 
-    private void createToast(String text) {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
-            Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
         } else { //Show different toast on API 8 devices and below
-            Toast.makeText(this, getString(R.string.old_phone_toast), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.old_phone_toast), Toast.LENGTH_SHORT).show();
         }
     }
 }
