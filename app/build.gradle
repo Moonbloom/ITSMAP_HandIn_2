@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "grp14.itsmap.com.hi214"
-        minSdkVersion 3
+        minSdkVersion 8
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"

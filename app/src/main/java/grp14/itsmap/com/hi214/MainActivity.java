@@ -94,15 +94,10 @@ public class MainActivity extends Activity {
         logCatHelper.postLogcat();
     }
 
-    @SuppressWarnings("deprecation")
     private void createToast(String text) {
-        //Need to use Build.VERSION.SDK as SDK_INT wasn't introduced until API level 4, and we support API level 3. Otherwise it'd throw an exception when run on API Level 3 devices.
-        int version = Integer.valueOf(Build.VERSION.SDK);
-
-        //Normal on non-API 3 devices
-        if(version > 3) {
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO) {
             Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-        } else { //Show different toast on API 3 devices and below
+        } else { //Show different toast on API 8 devices and below
             Toast.makeText(this, getString(R.string.old_phone_toast), Toast.LENGTH_LONG).show();
         }
     }

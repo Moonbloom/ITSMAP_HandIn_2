@@ -52,10 +52,9 @@ public class LogCatHelper {
             if(textView != null) {
                 setTextView(log.toString());
             } else {
-                Log.d(tag, "The textview was null");
+                Log.d(tag, "The textView was null");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.d(tag, e.toString());
             setTextView(e.toString());
         }
