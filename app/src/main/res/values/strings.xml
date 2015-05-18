@@ -1,6 +1,7 @@
 <resources>
 
-    <string name="app_name">HI214</string>
+    <string name="app_name">ITSMAP HandIn 2</string>
+    <!--<string name="app_name">HI214</string>-->
 
     <string name="textview_text">ITSMAP Hand In 2 - Group 14</string>
 
